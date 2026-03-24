@@ -30,11 +30,9 @@ class Game:
         self.player = Player([con.WINDOW_SIZE_X / 2, con.WINDOW_SIZE_Y / 2])
 
         self.hazard_manager = HazardManager()
-        self.hazard_manager.add_hazard(hz.CircleZone([60, 100], 50, 5, 200, 200))
-        self.hazard_manager.add_hazard(hz.CircleZone([700, 600], 50, 10, 800, 100))
-        self.hazard_manager.add_hazard(hz.CircleZone([60, 600], 50, 15, 500, 50))
+        self.hazard_manager.add_hazard(hz.RectZone([200, 200], 100, 100, 20))
         for i in range(100):
-            self.hazard_manager.add_hazard(hz.StraightBullet([i*10, 0], i+1, [0, 1], i*4, 10))
+            self.hazard_manager.add_hazard(hz.StraightBullet([(i-50)*10, (50-i)*10], i+1, [1, 1], (i*i+1) / 10, 10))
 
 
 

@@ -54,6 +54,45 @@ class CircleZone(Hazard):
         return True
 
 
+# ---------------
+# Rectanlge Zone
+# ---------------
+class RectZone(Hazard):
+    def __init__(self, pos, width, height, lifetime, color=(255, 0, 0)):
+        super().__init__(pos)
+        self.width = width
+        self.height = height
+        self.lifetime = lifetime
+        self.color = color
+    
+    def update(self, dt):
+        self.lifetime -= dt
+
+    def draw(self, surface):
+        pygame.draw.rect(surface, self.color, [self.pos[0], self.pos[1], self.width, self.height])
+
+    def collide_with(self, player_pos):
+        w = self.width
+        h = self.height
+
+        closest_x = max(self.pos[0], min(player_pos[0], self.pos[0] + w))
+        closest_y = max(self.pos[1], min(player_pos[1], self.pos[1] + h))
+        
+        distance_x = player_pos[0] - closest_x
+        distance_y = player_pos[1] - closest_y
+
+        squared_distance = distance_x**2 + distance_y**2
+
+        if squared_distance < PLAYER_SIZE**2:
+            return True
+        return False
+
+    def life(self, dt):
+        if self.lifetime <= 0:
+            return False
+        return True
+    
+    
 # -----------------------
 # Straight Moving Bullet
 # -----------------------
