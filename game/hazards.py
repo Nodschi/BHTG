@@ -82,6 +82,16 @@ class StraightBullet(Hazard):
         if self.lifetime <= 0:
             return False
         return True
+    
+# -----------------------
+# Straving Moving Bullet
+# -----------------------
 
-
-            
+class StravingBullet(Hazard):
+    def __init__(self, pos, radius, velocity, speed, lifetime, color=(255, 0, 0)):
+        super().__init__(pos)
+        self.radius = radius
+        self.velocity = velocity
+        self.speed = speed
+        self.lifetime = lifetime
+        self.color = color
