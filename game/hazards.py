@@ -59,7 +59,7 @@ class CircleZone(Hazard):
 # ---------------
 class RectZone(Hazard):
     def __init__(self, pos, width, height, lifetime, color=(255, 0, 0)):
-        super().__init__(pos)
+        super().__init__(pos) 
         self.width = width
         self.height = height
         self.lifetime = lifetime

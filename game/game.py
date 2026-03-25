@@ -22,6 +22,8 @@ class Game:
         # clock
         self.clock = pygame.time.Clock()
 
+        self.time = 0
+
         # tp indicator
         self.tp_indicator = pygame.Surface((con.PLAYER_SIZE * 2, con.PLAYER_SIZE * 2), pygame.SRCALPHA)
         pygame.draw.circle(self.tp_indicator, (0, 0, 0, 50), (con.PLAYER_SIZE, con.PLAYER_SIZE), con.PLAYER_SIZE)
@@ -57,6 +59,7 @@ class Game:
                 self.player.teleport(mouse_x, mouse_y)
 
     def update(self, dt):
+        self.time += dt
         self.player.update(dt)
         
         state = self.hazard_manager.collision(self.player.pos)
@@ -88,13 +91,13 @@ class Game:
         # Draw player
         pygame.draw.circle(self.screen, (0, 0, 0), self.player.pos, con.PLAYER_SIZE)
 
-
         # Draw hazards
         self.hazard_manager.draw_hazards(self.screen)
 
         pygame.display.flip()
 
     def cleanup(self):
+        print(self.time)
         pygame.quit()
         sys.exit()
 
