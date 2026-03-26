@@ -5,6 +5,7 @@ import sys
 import config as con
 from game.player import Player
 from game.utils import clamp_position
+from game.level import Level
 
 # Hazards
 from game.hazard_manager import HazardManager
@@ -37,11 +38,10 @@ class Game:
             self.hazard_manager.add_hazard(hz.StraightBullet([(i-50)*10, (50-i)*10], i+1, [1, 1], (i*i+1) / 10, 10))
 
 
-
-
     def run(self):
         while self.running:
             dt = self.clock.tick(60) / 1000.0
+            self.time += dt
 
             self.handle_events()
             self.update(dt)
@@ -59,7 +59,6 @@ class Game:
                 self.player.teleport(mouse_x, mouse_y)
 
     def update(self, dt):
-        self.time += dt
         self.player.update(dt)
         
         state = self.hazard_manager.collision(self.player.pos)
